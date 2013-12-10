@@ -38,14 +38,12 @@ function updatehome {
   source "${HOMESHICK}/homeshick.sh"
 
   local dir
-  local full_dir
-  for dir in "${HOMESICK_MKDIRS[@]}"; do
-    full_dir="${HOME}/${dir}"
-    if [[ ! -d ${full_dir} ]]; then
-      echo "Creating ${full_dir}."
-      mkdir -p ${HOME}/${dir}
+  for dir in ${HOMESICK_MKDIRS[@]}; do
+    if [[ ! -d ${dir} ]]; then
+      echo "Creating ${dir}."
+      mkdir -p ${dir}
     else
-      echo "${full_dir} exists."
+      echo "${dir} exists."
     fi
   done
 
