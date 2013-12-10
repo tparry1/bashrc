@@ -85,3 +85,5 @@
 
 [help]
   autocorrect = 0
+[rerere]
+	enabled = 1
