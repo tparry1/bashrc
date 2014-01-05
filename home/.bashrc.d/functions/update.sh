@@ -30,7 +30,6 @@ esac
 
 function updatehome {
   # Initialize homesick if needed.
-  set -e
   if [[ ! -d "${HOMESHICK}" ]]; then
     git clone git://github.com/andsens/homeshick.git ${HOMESHICK}
   fi
@@ -55,7 +54,6 @@ function updatehome {
 
   source ${HOME}/.bashrc
   ( cd ${HOME}/.vim; make install )
-  set +e
 }
 
 function update {
