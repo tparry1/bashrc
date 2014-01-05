@@ -1,5 +1,6 @@
 if [[ "${PLATFORM}" == "darwin" ]]; then
   brew_installed=${HOME}/.brew_installed
+  brew_taps=${HOME}/.brew_taps
 
   # Use GNU userland.
   path-prepend /usr/local/opt/coreutils/libexec/gnubin
@@ -12,24 +13,22 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   function brew {
     # Create a wrapper for brew that keeps a list of installed brew packages up to
     # date.
-    if $(which brew) ${@}; then
+    if command brew ${@}; then
       case ${1} in
-        install)
-          cat <($(which brew) list) ${brew_installed} | \
-            sort | uniq > ${brew_installed}
-          ;;
-        remove|rm|uninstall)
-          shift
-          for package in ${@}; do
-            command grep -v "${package}" ${brew_installed} > temp && \
-              mv temp ${brew_installed}
-          done
-          ;;
+        install|remove|rm|uninstall|tap)
+         sync-brew-installed
+        ;;
       esac
     fi
   }
 
   function sync-brew {
-    brew install $(cat ${brew_installed})
+    command brew tap $(cat ${brew_taps})
+    command brew install $(cat ${brew_installed})
+  }
+
+  function sync-brew-installed {
+    command brew leaves > ${brew_installed}
+    command brew tap > ${brew_taps}
   }
 fi
