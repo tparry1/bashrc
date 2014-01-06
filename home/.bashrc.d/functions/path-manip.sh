@@ -47,6 +47,19 @@ path-append() {
   if [ "$#" -eq 2 ]; then eval $2=\$path; else PATH="$path"; fi
 }
 
+path-ensure() {
+  local path_elements
+  if [ "$#" -eq 2 ]; then
+    path_elements="$(path-list $2)"
+  else
+    path_elements="$(path-list)"
+  fi
+
+  if ! [[ "$path_elements" =~ "$1" ]]; then
+    path-append $@
+  fi
+}
+
 # Copyright © 2011 Ingy dot Net <ingy@ingy.net>
 #
 # This library is free software, distributed under the ISC License.
