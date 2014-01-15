@@ -2,13 +2,13 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   brew_installed=${HOME}/.brew_installed
   brew_taps=${HOME}/.brew_taps
 
-  # Use GNU userland.
-  path-prepend /usr/local/opt/coreutils/libexec/gnubin
-  path-prepend /usr/local/opt/coreutils/libexec/gnuman MANPATH
-
   # Stuff for brew.
   path-prepend /usr/local/bin
   path-append /usr/local/sbin
+
+  # Use GNU userland.
+  path-prepend /usr/local/opt/coreutils/libexec/gnubin
+  path-prepend /usr/local/opt/coreutils/libexec/gnuman MANPATH
 
   function brew {
     # Create a wrapper for brew that keeps a list of installed brew packages up to
