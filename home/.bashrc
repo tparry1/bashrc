@@ -11,7 +11,7 @@ function source_platform {
 
   export PLATFORM=$(uname ${uname_flag} | tr "[:upper:]" "[:lower:]")
 
-  source ${HOME}/.bashrc.d/platform/${PLATFORM}.sh
+  source "${HOME}/.bashrc.d/platform/${PLATFORM}.sh"
 }
 
 function sourced {
@@ -20,14 +20,14 @@ function sourced {
   if [[ -d ${dir} ]]; then
     while read dotd; do
       source "${dotd}"
-    done < <(find ${dir} -name '*.sh')
+    done < <(find "${dir}" -name '*.sh')
     unset dotd
   fi
 }
 
 # Source my functions and start setting up my PATH
 sourced functions
-path-prepend ${HOME}/bin
+path-prepend "${HOME}/bin"
 
 # Source platform dependent stuff first to help with paths, etc.
 source_platform

@@ -1,5 +1,5 @@
 function gcd {
-  if $(which git &> /dev/null); then
+  if which git &> /dev/null; then
     local STATUS=$(git status 2>/dev/null)
     if [[ -z ${STATUS} ]]; then
       return;
@@ -10,7 +10,7 @@ function gcd {
 }
 
 function _git_cd {
-  if $(which git &> /dev/null); then
+  if which git &> /dev/null; then
     STATUS=$(git status 2>/dev/null)
     if [[ -z ${STATUS} ]]; then
       return
@@ -22,9 +22,9 @@ function _git_cd {
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}$2"
-    opts=$(cd $TARGET; compgen -d -o dirnames -S / -X '@(*/.git|*/.git/|.git|.git/)' $2)
+    opts=$(cd "$TARGET"; compgen -d -o dirnames -S / -X '@(*/.git|*/.git/|.git|.git/)' "$2")
     if [[ ${cur} == * ]]; then
-      COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+      COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
       return 0
     fi
   fi

@@ -1,5 +1,6 @@
-if [[ "${PLATFORM}" == "darwin" ]]; then
+if [[ "${PLATFORM}" == "darwin" ]] && which brew &> /dev/null; then
   brew_installed=${HOME}/.brew_installed
+  brew_cask_installed=${HOME}/.brew_cask_installed
   brew_taps=${HOME}/.brew_taps
 
   # Stuff for brew.
@@ -13,9 +14,9 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   function brew {
     # Create a wrapper for brew that keeps a list of installed brew packages up to
     # date.
-    if command brew ${@}; then
+    if command brew "${@}"; then
       case ${1} in
-        install|remove|rm|uninstall|tap)
+        install|remove|rm|uninstall|tap|cask)
          sync-brew-installed
         ;;
       esac
@@ -23,12 +24,14 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   }
 
   function sync-brew {
-    command brew tap $(cat ${brew_taps})
-    command brew install $(cat ${brew_installed})
+    command brew tap "$(cat "${brew_taps}")"
+    command brew install "$(cat "${brew_installed}")"
+    command brew cask install "$(cat "${brew_cask_installed}")"
   }
 
   function sync-brew-installed {
-    command brew leaves > ${brew_installed}
-    command brew tap > ${brew_taps}
+    command brew leaves > "${brew_installed}"
+    command brew tap > "${brew_taps}"
+    command brew cask list > "${brew_cask_installed}"
   }
 fi

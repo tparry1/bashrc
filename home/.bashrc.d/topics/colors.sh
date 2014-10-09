@@ -1,7 +1,10 @@
 # Oh, THE COLORS!
 if which dircolors >/dev/null 2>&1; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || \
+  if [[ -r ~/.dircolors ]]; then
+    eval "$(dircolors -b ~/.dircolors)"
+  else
     eval "$(dircolors -b)"
+  fi
 
   alias ls='ls --color=auto'
   alias dir='dir --color=auto'

@@ -1,2 +1,5 @@
-homebrew/completions
+caskroom/cask
+caskroom/fonts
+caskroom/versions
 homebrew/dupes
+homebrew/versions

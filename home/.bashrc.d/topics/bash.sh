@@ -27,8 +27,8 @@ fi
 case ${PLATFORM} in
   darwin)
     # Set up bash completion on OSX with brew
-    if [[ -f `brew --prefix`/etc/bash_completion ]]; then
-      source `brew --prefix`/etc/bash_completion
+    if [[ -f "$( brew --prefix )/share/bash-completion/bash_completion" ]]; then
+        source "$( brew --prefix )/share/bash-completion/bash_completion"
     fi
     ;;
   *)
