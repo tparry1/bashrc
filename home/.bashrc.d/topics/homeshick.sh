@@ -14,22 +14,6 @@ export HOMESICK_REPOS="dougborg/bashrc \
 # @PERSONALIZE@
 export HOMESICK_MKDIRS=(~/{.ssh,.vim,bin})
 
-:<<WIP
-export HOMESICK_CASTLES=$(homeshick list | tr -s ' ' | cut -d ' ' -f 2)
-
-# Create aliases for quickly editing castles.
-for castle in ${HOMESICK_CASTLES}; do
-  eval "function subl-${castle} {
-          subl ${HOMESICK}/${castle}
-        }"
-
-  eval "function vim-${castle} {
-          vim ${HOMESICK}/${castle}
-        }"
-done
-unset castle
-WIP
-
 # Create homesick alias in case I end up typing that instead.
 alias homesick=homeshick
 source "${HOMESHICK}/completions/homeshick-completion.bash"
