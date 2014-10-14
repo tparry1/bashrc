@@ -1,7 +1,7 @@
 powerline_path=$(python -c 'import pkgutil; print pkgutil.get_loader("powerline").filename' 2>/dev/null)
 if [[ -n "${powerline_path}" ]]; then
-  source ${powerline_path}/bindings/bash/powerline.sh
   powerline-daemon
+  source "${powerline_path}/bindings/bash/powerline.sh"
 else
   #
   # This shell prompt config file was created by promptline.vim

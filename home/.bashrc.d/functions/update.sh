@@ -1,6 +1,6 @@
-case ${PLATFORM} in
-  darwin)
-    function updateplatform {
+function updateplatform {
+  case ${PLATFORM} in
+    darwin)
       # Update all teh OSX things.
       sudo softwareupdate -i -a
       if which brew &> /dev/null; then
@@ -10,23 +10,21 @@ case ${PLATFORM} in
       fi
       which npm &> /dev/null && npm update npm -g && npm update -g
       which gem &> /dev/null && sudo gem update
-    }
     ;;
-  linux)
-    function updateplatform {
+
+    linux)
       # Update all teh Linux things.
       which apt-get &>/dev/null && sudo apt-get update && sudo apt-get upgrade
       which yum &> /dev/null && sudo yum update && sudo yum upgrade
       which npm &> /dev/null && npm update npm -g && npm update -g
       which gem &> /dev/null && sudo gem update
-    }
     ;;
-  *)
-    function updateplatform {
-      echo " I don't know how to update all teh things on this platform (${PLATFORM})."
-    }
+
+    *)
+      echo "I don't know how to update all teh things on${PLATFORM}." >&2
     ;;
-esac
+  esac
+}
 
 function updatehome {
   # Initialize homesick if needed.

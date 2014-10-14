@@ -2,25 +2,25 @@
 HISTCONTROL=ignoreboth
 
 # Some handy shell options
-shell_options="\
-  checkhash \
-  checkwinsize \
-  histappend \
-  extglob \
-  cdspell \
-  dirspell \
-  globstar \
-  autocd \
-"
+shell_options=(
+  checkhash
+  checkwinsize
+  histappend
+  extglob
+  cdspell
+  dirspell
+  globstar
+  autocd
+)
 
-if ! shopt -qs ${shell_options}; then
+if ! shopt -qs "${shell_options[@]}"; then
   echo "
 Warning! Not all shell options were set.
 You are probably running an older verison of bash:
-$( bash --version )
+$(bash --version)
 
 The following shell options are set:
-$( shopt -s )
+$(shopt -s)
 "
 fi
 
