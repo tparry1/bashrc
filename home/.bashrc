@@ -9,8 +9,7 @@ function source_platform {
     uname_flag='-s'
   fi
 
-  PLATFORM=$(uname ${uname_flag})
-  export PLATFORM=${PLATFORM,,}
+  export PLATFORM=$(uname ${uname_flag} | tr '[:upper:]' '[:lower:]')
 
   source "${HOME}/.bashrc.d/platform/${PLATFORM}.sh"
 }
@@ -19,10 +18,10 @@ function source_dir {
   local dir=${HOME}/.bashrc.d/${1}
 
   if [[ -d ${dir} ]]; then
-    while read dotd; do
+    local dotd
+    while read dotd <&3; do
       source "${dotd}"
     done 3< <(find "${dir}" -name '*.sh')
-    unset dotd
   fi
 }
 
