@@ -12,7 +12,7 @@ export HOMESICK_REPOS="dougborg/bashrc \
 
 # Shared dirs we should create first so homeshick repos don't mangle eachother:
 # @PERSONALIZE@
-export HOMESICK_MKDIRS='~/{.ssh,.vim,bin}'
+export HOMESICK_MKDIRS=( ~/{.ssh,.vim,bin} )
 
 function updateplatform {
   case "${PLATFORM}" in

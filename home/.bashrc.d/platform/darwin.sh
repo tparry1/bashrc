@@ -1,5 +1,7 @@
 # make less more friendly for non-text input files, see lesspipe(1)
-eval "$(SHELL=/bin/sh lesspipe.sh)"
+if which lesspipe.sh &> /dev/null; then
+  eval "$(SHELL=/bin/sh lesspipe.sh)"
+fi
 
 function emptytrash {
   # Empty the Trash on all mounted volumes and the main HDD
@@ -13,7 +15,7 @@ function emptytrash {
 alias dsclean="find . -type f -name '*.DS_Store' -ls -delete"
 
 #Setup brew prefix.
-which brew &> /dev/null && brew_prefix=$( brew --prefix )
+which brew &> /dev/null && brew_prefix=$(brew --prefix)
 
 # GRC colorizes nifty unix tools all over the place
 if which grc &>/dev/null && [[ -n "${brew_prefix}" ]]; then

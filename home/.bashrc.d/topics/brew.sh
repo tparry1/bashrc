@@ -18,12 +18,23 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   path-prepend /usr/local/opt/coreutils/libexec/gnuman MANPATH
 
   function sync-brew {
-    while read -u 3 tap; do
+    brew doctor
+
+    while read tap <&3; do
       brew tap "${tap}"
     done 3< "${brew_taps}"
 
-    brew install "$(<"${brew_formulas}")"
-    brew cask install "$(<"${brew_casks}")"
+    while read formula <&3; do
+      brew install "${formula}"
+    done 3< "${brew_formulas}"
+
+    while read cask <&3; do
+      brew cask install "${cask}"
+    done 3< "${brew_casks}"
+
+    brew linkapps
+    brew cleanup
+    brew prune
   }
 
   function sync-brew-installed {
@@ -36,6 +47,7 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
       git difftool -- "$(readlink "${brew_taps}")"
       git difftool -- "$(readlink "${brew_formulas}")"
       git difftool -- "$(readlink "${brew_casks}")"
+      git commit -av
     )
   }
 fi
