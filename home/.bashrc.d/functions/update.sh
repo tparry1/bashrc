@@ -1,5 +1,21 @@
+export HOMESICK="${HOME}/.homesick/repos"
+export HOMESHICK="${HOMESICK}/homeshick"
+
+# Use homeshick to manage my dotfiles repos.
+source "${HOMESHICK}/homeshick.sh"
+
+# My homesick repos
+# @PERSONALIZE@
+export HOMESICK_REPOS="dougborg/bashrc \
+                       dougborg/vimrc \
+                       dougborg/atomrc"
+
+# Shared dirs we should create first so homeshick repos don't mangle eachother:
+# @PERSONALIZE@
+export HOMESICK_MKDIRS='~/{.ssh,.vim,bin}'
+
 function updateplatform {
-  case ${PLATFORM} in
+  case "${PLATFORM}" in
     darwin)
       # Update all teh OSX things.
       sudo softwareupdate -i -a
@@ -21,7 +37,7 @@ function updateplatform {
     ;;
 
     *)
-      echo "I don't know how to update all teh things on${PLATFORM}." >&2
+      echo "I don't know how to update all teh things on ${PLATFORM}." >&2
     ;;
   esac
 }
@@ -29,32 +45,41 @@ function updateplatform {
 function updatehome {
   # Initialize homesick if needed.
   if [[ ! -d "${HOMESHICK}" ]]; then
-    git clone git://github.com/andsens/homeshick.git ${HOMESHICK}
+    git clone git://github.com/andsens/homeshick.git "${HOMESHICK}"
   fi
 
   source "${HOMESHICK}/homeshick.sh"
 
   local dir
-  for dir in ${HOMESICK_MKDIRS[@]}; do
+  for dir in "${HOMESICK_MKDIRS[@]}"; do
     if [[ ! -d ${dir} ]]; then
       echo "Creating ${dir}."
-      mkdir -p ${dir}
+      mkdir -p "${dir}"
     else
       echo "${dir} exists."
     fi
   done
 
-  for repo in ${HOMESICK_REPOS}; do homeshick clone ${repo}; done
+  for repo in ${HOMESICK_REPOS}; do
+    homeshick --batch clone "${repo}";
+  done
 
   # Update homesick repos.
-  homeshick pull
-  yes | homeshick symlink
+  homeshick --batch pull
+  homeshick --batch symlink
 
-  source ${HOME}/.bashrc
-  ( cd ${HOME}/.vim; make install )
+  source "${HOME}/.bashrc"
+
+  # Update vim configurations
+  ( cd "${HOME}/.vim"; make install )
+
+  # Sync atom packages
+  if which atom &> /dev/null; then
+    sync-atom
+  fi
 }
 
-function update {
+function updateall {
   updateplatform
   updatehome
 }
@@ -62,8 +87,8 @@ function update {
 function ssh-init-home {
   local target=${1}
 
-  ssh-copy-id ${target}
-  ssh -At ${target} bash <<EOF
+  ssh-copy-id "${target}"
+  ssh -At "${target}" bash <<EOF
     export HOMESICK="\${HOME}/.homesick/repos"
     export HOMESHICK="\${HOMESICK}/homeshick"
     export HOMESICK_REPOS="${HOMESICK_REPOS}"
@@ -72,5 +97,3 @@ function ssh-init-home {
     updatehome
 EOF
 }
-
-# vim: set ft=sh ts=2 sw=2 tw=0 :

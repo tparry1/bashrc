@@ -5,9 +5,9 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 
-  brew_installed=${HOME}/.brew_installed
-  brew_cask_installed=${HOME}/.brew_cask_installed
-  brew_taps=${HOME}/.brew_taps
+  brew_formulas=${HOME}/.config/brew/formulas
+  brew_casks=${HOME}/.config/brew/casks
+  brew_taps=${HOME}/.config/brew/taps
 
   # Stuff for brew.
   path-prepend /usr/local/bin
@@ -22,13 +22,20 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
       brew tap "${tap}"
     done 3< "${brew_taps}"
 
-    brew install "$(<"${brew_installed}")"
-    brew cask install "$(<"${brew_cask_installed}")"
+    brew install "$(<"${brew_formulas}")"
+    brew cask install "$(<"${brew_casks}")"
   }
 
   function sync-brew-installed {
     brew tap > "${brew_taps}"
-    brew leaves > "${brew_installed}"
-    brew cask list > "${brew_cask_installed}"
+    brew leaves > "${brew_formulas}"
+    brew cask list > "${brew_casks}"
+
+    (
+      homeshick cd bashrc
+      git difftool -- "$(readlink "${brew_taps}")"
+      git difftool -- "$(readlink "${brew_formulas}")"
+      git difftool -- "$(readlink "${brew_casks}")"
+    )
   }
 fi
