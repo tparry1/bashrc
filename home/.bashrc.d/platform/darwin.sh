@@ -3,7 +3,7 @@ if which lesspipe.sh &> /dev/null; then
   eval "$(SHELL=/bin/sh lesspipe.sh)"
 fi
 
-function emptytrash {
+emptytrash() {
   # Empty the Trash on all mounted volumes and the main HDD
   # Also, clear Apple’s System Logs to improve shell startup speed
   sudo rm -rfv /Volumes/*/.Trashes

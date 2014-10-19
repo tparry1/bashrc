@@ -14,7 +14,7 @@ export HOMESICK_REPOS="dougborg/bashrc \
 # @PERSONALIZE@
 export HOMESICK_MKDIRS=( ~/{.ssh,.vim,bin} )
 
-function updateplatform {
+updateplatform() {
   case "${PLATFORM}" in
     darwin)
       # Update all teh OSX things.
@@ -42,7 +42,7 @@ function updateplatform {
   esac
 }
 
-function updatehome {
+updatehome() {
   # Initialize homesick if needed.
   if [[ ! -d "${HOMESHICK}" ]]; then
     git clone git://github.com/andsens/homeshick.git "${HOMESHICK}"
@@ -79,12 +79,12 @@ function updatehome {
   fi
 }
 
-function updateall {
+updateall() {
   updateplatform
   updatehome
 }
 
-function ssh-init-home {
+ssh-init-home() {
   local target=${1}
 
   ssh-copy-id "${target}"

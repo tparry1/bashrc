@@ -1,4 +1,4 @@
-function ssh_clean {
+ssh_clean() {
   local ssh_dir="${HOME}/.ssh"
 
   local known_hosts=${ssh_dir}/known_hosts
@@ -17,7 +17,7 @@ function ssh_clean {
   chmod 600 "${known_hosts}"
 }
 
-function start_agent {
+start_agent() {
 # Initialize new agent and add authentication
   echo "Initialising new SSH agent..."
 
@@ -33,7 +33,7 @@ function start_agent {
   ssh-add
 }
 
-function ssh-login {
+ssh-login() {
   if [[ -f "${SSH_ENV}" ]]; then
     # Find SSH_AUTH_SOCK and SSH_AGENT_PID of the available daemon
     source "${SSH_ENV}" > /dev/null

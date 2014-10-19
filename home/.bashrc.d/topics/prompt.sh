@@ -7,7 +7,7 @@ else
   # This shell prompt config file was created by promptline.vim
   #
 
-  function __promptline_last_exit_code {
+  __promptline_last_exit_code() {
 
     [[ $last_exit_code -gt 0 ]] || return 1;
 
@@ -51,7 +51,7 @@ else
     printf "%s" "${reset_bg}${sep}$reset$space"
   }
 
-  function __promptline_vcs_branch {
+  __promptline_vcs_branch() {
     local branch
     local branch_symbol=" "
 
@@ -66,7 +66,7 @@ else
     return 1
   }
 
-  function __promptline_cwd {
+  __promptline_cwd() {
     local dir_limit="3"
     local truncation="⋯"
     local first_char
@@ -97,7 +97,7 @@ else
     printf "%s" "$first_char$formatted_cwd"
   }
 
-  function __promptline_left_prompt {
+  __promptline_left_prompt() {
     local slice_prefix slice_empty_prefix slice_joiner slice_suffix is_prompt_empty=1
 
     # section "a" header
@@ -122,7 +122,7 @@ else
     printf "%s" "${reset_bg}${sep}$reset$space"
   }
 
-  function __promptline_wrapper {
+  __promptline_wrapper() {
     # wrap the text in $1 with $2 and $3, only if $1 is not empty
     # $2 and $3 typically contain non-content-text, like color escape codes and separators
 
@@ -130,7 +130,7 @@ else
     printf "%s" "${2}${1}${3}"
   }
 
-  function __promptline_right_prompt {
+  __promptline_right_prompt() {
     local slice_prefix slice_empty_prefix slice_joiner slice_suffix
 
     # section "warn" header
@@ -147,7 +147,7 @@ else
     printf "%s" "$reset"
   }
 
-  function __promptline {
+  __promptline() {
     local last_exit_code="${PROMPTLINE_LAST_EXIT_CODE:-$?}"
 
     local esc=$'[' end_esc=m

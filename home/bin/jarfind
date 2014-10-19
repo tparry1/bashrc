@@ -3,7 +3,7 @@
 # default glob to find jar files
 jarGlob='*.jar'
 
-function usage {
+usage() {
   local bin=$(basename ${0})
   echo "Find files within a set of jars. By default, the script looks recursively for jar files in the current directory." >&2
   echo >&2

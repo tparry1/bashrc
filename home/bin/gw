@@ -6,11 +6,11 @@ GRADLE_BUILDFILE='build.gradle'
 DEFAULT_BUILDFILE="${HOME}/.gradle/default/${GRADLE_BUILDFILE}"
 GW_ARGS=${@}
 
-function echo_error() {
+echo_error() {
   echo "${@}" >&2
 }
 
-function lookup() {
+lookup() {
   local file=${1}
   local curr_path=${2}
   [[ -z "${curr_path}" ]] && curr_path=${PWD}
@@ -26,7 +26,7 @@ function lookup() {
   done
 }
 
-function select_gradle() {
+select_gradle() {
   local dir=${1}
   local gradle=$(lookup ${GRADLEW} ${dir})
 
@@ -46,7 +46,7 @@ function select_gradle() {
   fi
 }
 
-function execute_gradle() {
+execute_gradle() {
   local build_gradle=$(lookup ${GRADLE_BUILDFILE})
 
   if [[ -z "${build_gradle}" ]]; then

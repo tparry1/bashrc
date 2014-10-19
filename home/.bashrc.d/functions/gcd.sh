@@ -1,6 +1,6 @@
-function gcd {
+gcd() {
   if which git &> /dev/null; then
-    local STATUS=$(git status 2>/dev/null)
+      local STATUS=$(git status 2>/dev/null)
     if [[ -z ${STATUS} ]]; then
       return;
     fi
@@ -9,7 +9,7 @@ function gcd {
   fi
 }
 
-function _git_cd {
+_git_cd() {
   if which git &> /dev/null; then
     STATUS=$(git status 2>/dev/null)
     if [[ -z ${STATUS} ]]; then

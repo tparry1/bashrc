@@ -17,7 +17,7 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   path-prepend /usr/local/opt/coreutils/libexec/gnubin
   path-prepend /usr/local/opt/coreutils/libexec/gnuman MANPATH
 
-  function sync-brew {
+  sync-brew() {
     brew doctor
 
     while read tap <&3; do
@@ -37,7 +37,7 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
     brew prune
   }
 
-  function sync-brew-installed {
+  sync-brew-installed() {
     brew tap > "${brew_taps}"
     brew leaves > "${brew_formulas}"
     brew cask list > "${brew_casks}"

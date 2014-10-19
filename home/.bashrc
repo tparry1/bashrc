@@ -2,7 +2,7 @@
 # interactively, don't do anything
 [[ -z "${PS1}" ]] && return
 
-function source_platform {
+source_platform() {
   if [[ ${OS} =~ Windows ]]; then
     uname_flag='-o'
   else
@@ -14,7 +14,7 @@ function source_platform {
   source "${HOME}/.bashrc.d/platform/${PLATFORM}.sh"
 }
 
-function source_dir {
+source_dir() {
   local dir=${HOME}/.bashrc.d/${1}
 
   if [[ -d ${dir} ]]; then
