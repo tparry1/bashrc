@@ -3,6 +3,3 @@
 
 # make less more friendly for non-text input files, see lesspipe(1)
 eval "$(SHELL=/bin/sh lesspipe)"
-
-# Mix the hub subcommands in with git on linux
-smart-alias git 'hub'
