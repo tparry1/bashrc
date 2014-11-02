@@ -12,9 +12,9 @@ command -v atom &>- && HOMESICK_REPOS+=( "dougborg/atomrc" )
 export HOMESICK_REPOS="${HOMESICK_REPOS[@]}"
 
 # Shared dirs we should create first so homeshick repos don't mangle eachother:
-export HOMESICK_MKDIRS=( "${HOME}/.ssh \
-                        ${HOME}/.vim \
-                        ${HOME}/bin " )
+export HOMESICK_MKDIRS=( "${HOME}/.ssh"
+                         "${HOME}/.vim"
+                         "${HOME}/bin" )
 
 updateplatform() {
   case "${PLATFORM}" in
@@ -86,6 +86,7 @@ updatehome() {
 
   # Sync atom packages
   command -v apm &>- && ( cd "${HOME}/.atom"; ./sync-atom )
+}
 
 
 updateall() {
