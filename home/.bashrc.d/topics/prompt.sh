@@ -213,6 +213,15 @@ function __promptline_git_status {
   local added_count=0
   local is_clean=""
 
+  local black_fg="${wrap}38;5;0${end_wrap}"
+  local red_fg="${wrap}38;5;1${end_wrap}"
+  local green_fg="${wrap}38;5;2${end_wrap}"
+  local yellow_fg="${wrap}38;5;3${end_wrap}"
+  local blue_fg="${wrap}38;5;4${end_wrap}"
+  local magenta_fg="${wrap}38;5;5${end_wrap}"
+  local cyan_fg="${wrap}38;5;6${end_wrap}"
+  local white_fg="${wrap}38;5;7${end_wrap}"
+
   set -- $(git rev-list --left-right --count @{upstream}...HEAD 2>/dev/null)
   local behind_count=$1
   local ahead_count=$2
@@ -243,37 +252,37 @@ function __promptline_git_status {
 
   local leading_whitespace=""
   [[ $ahead_count -gt 0 ]] && {
-    printf "%s" "$leading_whitespace$ahead_symbol$ahead_count"
+    printf "%s" "$cyan_fg$leading_whitespace$ahead_symbol$ahead_count$x_fg"
     leading_whitespace=" "
   }
 
   [[ $behind_count -gt 0 ]] && {
-    printf "%s" "$leading_whitespace$behind_symbol$behind_count"
+    printf "%s" "$magenta_fg$leading_whitespace$behind_symbol$behind_count$x_fg"
     leading_whitespace=" "
   }
 
   [[ $modified_count -gt 0 ]] && {
-    printf "%s" "$leading_whitespace$modified_symbol$modified_count"
+    printf "%s" "$yellow_fg$leading_whitespace$modified_symbol$modified_count$x_fg"
     leading_whitespace=" "
   }
 
   [[ $unmerged_count -gt 0 ]] && {
-    printf "%s" "$leading_whitespace$unmerged_symbol$unmerged_count"
+    printf "%s" "$magenta_fg$leading_whitespace$unmerged_symbol$unmerged_count$x_fg"
     leading_whitespace=" "
   }
 
   [[ $added_count -gt 0 ]] && {
-    printf "%s" "$leading_whitespace$added_symbol$added_count"
+    printf "%s" "$blue_fg$leading_whitespace$added_symbol$added_count$x_fg"
     leading_whitespace=" "
   }
 
   [[ $has_untracked_files -gt 0 ]] && {
-    printf "%s" "$leading_whitespace$has_untracked_files_symbol"
+    printf "%s" "$yellow_fg$leading_whitespace$has_untracked_files_symbol$x_fg"
     leading_whitespace=" "
   }
 
   [[ $is_clean -gt 0 ]]  && {
-    printf "%s" "$leading_whitespace$clean_symbol"
+    printf "%s" "$leading_whitespace$green_fg$clean_symbol$x_fg"
     leading_whitespace=" "
   }
 }
