@@ -85,8 +85,8 @@ updatehome() {
   [[ -e "${HOME}/.vim/makefile" ]] && ( cd "${HOME}/.vim"; make install )
 
   # Sync atom packages
-  [[ -e "${HOME}/.atom/sync-atom" ]] && ( cd "${HOME}/.atom"; ./sync-atom )
-}
+  command -v apm &>- && ( cd "${HOME}/.atom"; ./sync-atom )
+
 
 updateall() {
   updateplatform
