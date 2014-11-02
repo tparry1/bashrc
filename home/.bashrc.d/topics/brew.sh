@@ -1,10 +1,5 @@
 if [[ "${PLATFORM}" == "darwin" ]]; then
 
-  # Install Homebrew if it isn't already
-  if ! which brew &> /dev/null; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  fi
-
   brew_formulas=${HOME}/.config/brew/formulas
   brew_casks=${HOME}/.config/brew/casks
   brew_taps=${HOME}/.config/brew/taps
@@ -18,6 +13,11 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   path-prepend /usr/local/opt/coreutils/libexec/gnuman MANPATH
 
   sync-brew() {
+    # Install Homebrew if it isn't already
+    if ! command -v brew &>-; then
+      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+
     brew doctor
 
     while read tap <&3; do

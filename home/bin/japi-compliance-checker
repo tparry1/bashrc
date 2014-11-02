@@ -745,11 +745,11 @@ sub get_CmdPath_Default_I($)
             return $Name;
         }
     }
-    if($Name!~/which/)
+    if($Name!~/command -v/)
     {
-        if(my $WhichCmd = get_CmdPath("which"))
+        if(my $command -vCmd = get_CmdPath("command -v"))
         {
-            if(`$WhichCmd $Name 2>\"$TMP_DIR/null\"`) {
+            if(`$command -vCmd $Name 2>\"$TMP_DIR/null\"`) {
                 return $Name;
             }
         }
@@ -4601,7 +4601,7 @@ sub getReport($)
                                 }
                                 this.className = 'tab active';
                                 tab.style.display = 'block';
-                                // window.location.hash = this.id.replace('ID', '');
+                                // window.location.command -v = this.id.replace('ID', '');
                                 return false;
                             }
                         }
@@ -6847,9 +6847,9 @@ sub get_OSgroup()
 
 sub dump_sorting($)
 {
-    my $Hash = $_[0];
-    return [] if(not $Hash);
-    my @Keys = keys(%{$Hash});
+    my $command -v = $_[0];
+    return [] if(not $command -v);
+    my @Keys = keys(%{$command -v});
     return [] if($#Keys<0);
     if($Keys[0]=~/\A\d+\Z/)
     { # numbers

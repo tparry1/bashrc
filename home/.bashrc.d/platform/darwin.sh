@@ -1,5 +1,5 @@
 # make less more friendly for non-text input files, see lesspipe(1)
-if which lesspipe.sh &> /dev/null; then
+if command -v lesspipe.sh &>-; then
   eval "$(SHELL=/bin/sh lesspipe.sh)"
 fi
 
@@ -15,9 +15,9 @@ emptytrash() {
 alias dsclean="find . -type f -name '*.DS_Store' -ls -delete"
 
 #Setup brew prefix.
-which brew &> /dev/null && brew_prefix=$(brew --prefix)
+command -v brew &>- && brew_prefix=$(brew --prefix)
 
 # GRC colorizes nifty unix tools all over the place
-if which grc &>/dev/null && [[ -n "${brew_prefix}" ]]; then
+if command -v grc &>- && [[ -n "${brew_prefix}" ]]; then
   source "${brew_prefix}/etc/grc.bashrc"
 fi
