@@ -6,8 +6,8 @@ source "${HOMESHICK}/homeshick.sh"
 
 # My homesick repos
 HOMESICK_REPOS=( "dougborg/bashrc" )
-command -v vim &>- && HOMESICK_REPOS+=( "dougborg/vimrc" )
-command -v atom &>- && HOMESICK_REPOS+=( "dougborg/atomrc" )
+command -v vim &> /dev/null && HOMESICK_REPOS+=( "dougborg/vimrc" )
+command -v atom &> /dev/null && HOMESICK_REPOS+=( "dougborg/atomrc" )
 
 export HOMESICK_REPOS="${HOMESICK_REPOS[@]}"
 
@@ -21,7 +21,7 @@ updateplatform() {
     darwin)
       # Update all teh OSX things.
       sudo softwareupdate -i -a
-      if command -v brew &>-; then
+      if command -v brew &> /dev/null; then
         brew update
         brew upgrade
         brew cleanup
@@ -32,21 +32,21 @@ updateplatform() {
 
     linux)
       # Update all teh Linux things.
-      command -v apt-get &>- && sudo apt-get update && sudo apt-get upgrade
-      command -v yum &>- && sudo yum update && sudo yum upgrade
+      command -v apt-get &> /dev/null && sudo apt-get update && sudo apt-get upgrade
+      command -v yum &> /dev/null && sudo yum update && sudo yum upgrade
     ;;
 
     *)
       echo "I don't know how to update all teh things on ${PLATFORM}." >&2
     ;;
   esac
-  command -v npm &>- && npm install npm@latest -g && npm update -g
-  command -v gem &>- && sudo gem update
+  command -v npm &> /dev/null && npm install npm@latest -g && npm update -g
+  command -v gem &> /dev/null && sudo gem update
 }
 
 updatehome() {
   # Make sure git works - we're gonna need it!
-  if ! command -v git &>-; then
+  if ! command -v git &> /dev/null; then
     echo "git isn't installed or isn't functional." >&2
     return 1
   fi
@@ -85,7 +85,7 @@ updatehome() {
   [[ -e "${HOME}/.vim/makefile" ]] && ( cd "${HOME}/.vim"; make install )
 
   # Sync atom packages
-  command -v apm &>- && ( cd "${HOME}/.atom"; ./sync-atom )
+  command -v apm &> /dev/null && ( cd "${HOME}/.atom"; ./sync-atom )
 }
 
 

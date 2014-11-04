@@ -1,4 +1,4 @@
-if command -v go &>-; then
+if command -v go &> /dev/null; then
   case ${PLATFORM} in
     darwin)
       GOROOT=$(brew --prefix go)

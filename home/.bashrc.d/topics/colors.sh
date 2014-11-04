@@ -1,5 +1,5 @@
 # Oh, THE COLORS!
-if command -v dircolors &>-; then
+if command -v dircolors &> /dev/null; then
   if [[ -r ~/.dircolors ]]; then
     eval "$(dircolors -b ~/.dircolors)"
   else

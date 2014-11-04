@@ -4,17 +4,9 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   brew_casks=${HOME}/.config/brew/casks
   brew_taps=${HOME}/.config/brew/taps
 
-  # Stuff for brew.
-  path-prepend /usr/local/bin
-  path-append /usr/local/sbin
-
-  # Use GNU userland.
-  path-prepend /usr/local/opt/coreutils/libexec/gnubin
-  path-prepend /usr/local/opt/coreutils/libexec/gnuman MANPATH
-
   sync-brew() {
     # Install Homebrew if it isn't already
-    if ! command -v brew &>-; then
+    if ! command -v brew &> /dev/null; then
       ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 

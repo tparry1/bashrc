@@ -4,7 +4,7 @@ smart-alias() {
   shift
   local replacement="${@}"
 
-  if command -v "${cmd}" &>-; then
+  if command -v "${cmd}" &> /dev/null; then
     alias "${cmd}"="${replacement}"
   fi
 }

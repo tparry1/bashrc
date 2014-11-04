@@ -1,5 +1,5 @@
 gcd() {
-  if command -v git &>-; then
+  if command -v git &> /dev/null; then
       local STATUS=$(git status 2>/dev/null)
     if [[ -z ${STATUS} ]]; then
       return;
@@ -10,7 +10,7 @@ gcd() {
 }
 
 _git_cd() {
-  if command -v git &>-; then
+  if command -v git &> /dev/null; then
     STATUS=$(git status 2>/dev/null)
     if [[ -z ${STATUS} ]]; then
       return
