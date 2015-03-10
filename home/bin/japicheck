@@ -15,4 +15,4 @@ diff <(jarls ${file1}) --label=$(basename ${file1}) <(jarls ${file2}) --label=$(
 
 echo -e "\nDeep compatibility report:"
 reportpath="./compatability.html"
-japi-compliance-checker -open -report-path ${reportpath} ${@}
+japi-compliance-checker -open -report-path "${reportpath}" "${1}" "${2}"

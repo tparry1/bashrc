@@ -10,3 +10,6 @@ if [ -n "$BASH_VERSION" ]; then
 	. "$HOME/.bash_profile"
     fi
 fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/douglas.borg/.gvm/bin/gvm-init.sh" ]] && source "/Users/douglas.borg/.gvm/bin/gvm-init.sh"
