@@ -5,7 +5,7 @@ export HOMESHICK="${HOMESICK}/homeshick"
 source "${HOMESHICK}/homeshick.sh"
 
 # My homesick repos
-HOMESICK_REPOS=( "git@github.com:dougborg/bashrc" )
+HOMESICK_REPOS=( "git@github.com:rdsmallwood928/bashrc" )
 command -v vim &> /dev/null && HOMESICK_REPOS+=( "git@github.com:dougborg/vimrc" )
 command -v atom &> /dev/null && HOMESICK_REPOS+=( "git@github.com:dougborg/atomrc" )
 

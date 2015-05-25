@@ -12,4 +12,4 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/douglas.borg/.gvm/bin/gvm-init.sh" ]] && source "/Users/douglas.borg/.gvm/bin/gvm-init.sh"
+[[ -s "/Users/robert.smallwood/.gvm/bin/gvm-init.sh" ]] && source "/Users/robert.smallwood/.gvm/bin/gvm-init.sh"
