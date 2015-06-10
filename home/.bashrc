@@ -37,5 +37,7 @@ source_dir topics
 
 source ./.aws
 
+#appending .local to path so that pip --user installs are found
+export PATH=${PATH}:${HOME}/.local/bin
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/robert.smallwood/.gvm/bin/gvm-init.sh" ]] && source "/Users/robert.smallwood/.gvm/bin/gvm-init.sh"
