@@ -22,15 +22,6 @@ source_dir topics
 
 source ./.aws
 
-docker_start() {
-  # If I have boot2docker, go ahead and init it
-  if hash boot2docker 2>/dev/null; then
-    boot2docker init
-    boot2docker start
-    eval $(boot2docker shellinit)
-  fi
-}
-
 #appending .local to path so that pip --user installs are found
 export PATH=${PATH}:${HOME}/.local/bin
 
@@ -44,6 +35,9 @@ else
     source "$HOME/.nvm/nvm.sh"
   fi
 fi
+
+export ANDROID_HOME=${HOME}/Development/android
+export PATH=${PATH}:${ANDRIOD_HOME}/bin
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/robert.smallwood/.gvm/bin/gvm-init.sh" ]] && source "/Users/robert.smallwood/.gvm/bin/gvm-init.sh"
