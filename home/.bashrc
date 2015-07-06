@@ -37,7 +37,7 @@ else
 fi
 
 export ANDROID_HOME=${HOME}/Development/android
-export PATH=${PATH}:${ANDRIOD_HOME}/bin
+export PATH=${PATH}:${ANDROID_HOME}/bin
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/robert.smallwood/.gvm/bin/gvm-init.sh" ]] && source "/Users/robert.smallwood/.gvm/bin/gvm-init.sh"
