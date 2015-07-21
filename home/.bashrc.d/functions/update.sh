@@ -17,6 +17,7 @@ export HOMESICK_MKDIRS=( "${HOME}/.ssh"
                          "${HOME}/bin" )
 
 updateplatform() {
+  echo "This appears to be ${PLATFORM}"
   case "${PLATFORM}" in
     darwin)
       # Update all teh OSX things.
