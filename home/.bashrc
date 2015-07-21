@@ -2,28 +2,13 @@
 # interactively, don't do anything
 [[ -z "${PS1}" ]] && return
 
-source_platform() {
-  if [[ ${OS} =~ Windows ]]; then
-    uname_flag='-o'
-  else
-    uname_flag='-s'
-  fi
-
-  export PLATFORM=$(uname ${uname_flag} | tr '[:upper:]' '[:lower:]')
-
-  source "${HOME}/.bashrc.d/platform/${PLATFORM}.sh"
-}
-
-source_dir() {
-  local dir=${HOME}/.bashrc.d/${1}
-
-  if [[ -d ${dir} ]]; then
-    local dotd
-    while read dotd <&3; do
-      source "${dotd}"
-    done 3< <(find "${dir}" -name '*.sh')
-  fi
-}
+# Load the shell dotfiles, and then some:
+# # * ~/.path can be used to extend `$PATH`.
+# # * ~/.extra can be used for other settings you don't want to commit.
+for file in ~/.{path,bash_prompt,exports,aliases,bash_functions,extra}; do
+  [ -r "$file" ] && source "$file"
+done
+unset file
 
 # Source my functions and start setting up my PATH
 source_dir functions
@@ -36,6 +21,23 @@ source_platform
 source_dir topics
 
 source ./.aws
+
+#appending .local to path so that pip --user installs are found
+export PATH=${PATH}:${HOME}/.local/bin
+
+# init nvm if it exists
+if command_exists brew ; then
+  export NVM_DIR=~/.nvm
+  source "$(brew --prefix nvm)/nvm.sh"
+else
+  if command_exists "$HOME/.nvm/nvm.sh" ; then
+    export NVM_DIR=~/.nvm
+    source "$HOME/.nvm/nvm.sh"
+  fi
+fi
+
+export ANDROID_HOME=${HOME}/Development/android
+export PATH=${PATH}:${ANDROID_HOME}/tools
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/robert.smallwood/.gvm/bin/gvm-init.sh" ]] && source "/Users/robert.smallwood/.gvm/bin/gvm-init.sh"
