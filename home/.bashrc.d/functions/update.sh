@@ -23,6 +23,7 @@ updateplatform() {
       # Update all teh OSX things.
       sudo softwareupdate -i -a
       if command -v brew &> /dev/null; then
+        sync-brew
         brew update
         brew upgrade
         brew cleanup
