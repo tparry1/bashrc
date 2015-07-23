@@ -96,6 +96,14 @@ updateall() {
   updatehome
 }
 
+updateclean() {
+  unset -f updateall
+  unset -f updatehome
+  unset -f updateplatform
+  rm -rf ~/.homesick/repos/bashrc
+  rm -rf ~/.homesick/repos/vimrc
+}
+
 ssh-init-home() {
   local target=${1}
 
