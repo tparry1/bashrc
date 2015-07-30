@@ -125,16 +125,19 @@ completehomeupdate() {
 
   # Sync atom packages
   command -v apm &> /dev/null && ( cd "${HOME}/.atom"; ./sync-atom )
+  echo "update complete"
 }
 
 updatehome() {
   # Make sure git works - we're gonna need it!
   if command_exists updateclean; then
     updateclean
-    command -v source <(curl -fsSL https://raw.githubusercontent.com/rdsmallwood928/bashrc/master/home/.bash_functions)
+    curl -fsSL https://raw.githubusercontent.com/rdsmallwood928/bashrc/master/home/.bash_functions.sh > ${HOME}/.temp_func
+    source ${HOME}/.temp_func
+    rm ${HOME}/.temp_func
     echo "clean completed"
   fi
-  completeupdatehome
+  completehomeupdate
 }
 
 
