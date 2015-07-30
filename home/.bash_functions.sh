@@ -1,5 +1,5 @@
 command_exists () {
-      type "$1" &> /dev/null ;
+      type "$1" &> /dev/null;
       #echo "command $1 status $?"
 }
 
@@ -84,8 +84,7 @@ updateplatform() {
   command -v gem &> /dev/null && sudo gem update
 }
 
-updatehome() {
-  # Make sure git works - we're gonna need it!
+completehomeupdate() {
   if ! command -v git &> /dev/null; then
     echo "git isn't installed or isn't functional." >&2
     return 1
@@ -126,6 +125,16 @@ updatehome() {
 
   # Sync atom packages
   command -v apm &> /dev/null && ( cd "${HOME}/.atom"; ./sync-atom )
+}
+
+updatehome() {
+  # Make sure git works - we're gonna need it!
+  if command_exists updateclean; then
+    updateclean
+    command -v source <(curl -fsSL https://raw.githubusercontent.com/rdsmallwood928/bashrc/master/home/.bash_functions)
+    echo "clean completed"
+  fi
+  completeupdatehome
 }
 
 
