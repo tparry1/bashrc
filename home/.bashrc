@@ -11,6 +11,7 @@ done
 unset file
 
 # Source my functions and start setting up my PATH
+source .bash_functions.sh
 source_dir functions
 path-prepend "${HOME}/bin"
 
