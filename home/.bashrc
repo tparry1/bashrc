@@ -11,7 +11,7 @@ done
 unset file
 
 # Source my functions and start setting up my PATH
-source "{$HOME}/.bash_functions.sh"
+source "${HOME}/.bash_functions.sh"
 source_dir functions
 path-prepend "${HOME}/bin"
 
@@ -39,6 +39,8 @@ fi
 
 export ANDROID_HOME=${HOME}/Development/android
 export PATH=${PATH}:${ANDROID_HOME}/tools
+
+tmux new -s main
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/robert.smallwood/.gvm/bin/gvm-init.sh" ]] && source "/Users/robert.smallwood/.gvm/bin/gvm-init.sh"
