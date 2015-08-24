@@ -35,10 +35,12 @@ else
     export NVM_DIR=~/.nvm
     source "$HOME/.nvm/nvm.sh"
   fi
-
-if [ "${PLATFORM}" -eq "darwin" ] then
-    export ECLIPSE_HOME=/opt/homebrew-cask/Caskroom/eclipse-java/4.5/Eclipse.app/Contents/Eclipse
 fi
+
+if [ "${PLATFORM}" = "darwin" ] ; then
+  export ECLIPSE_HOME=/opt/homebrew-cask/Caskroom/eclipse-java/4.5/Eclipse.app/Contents/Eclipse;
+fi
+
 export ANDROID_HOME=${HOME}/Development/android
 export PATH=${PATH}:${ANDROID_HOME}/tools
 
