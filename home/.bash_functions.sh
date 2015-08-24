@@ -80,6 +80,7 @@ updateplatform() {
       echo "I don't know how to update all teh things on ${PLATFORM}." >&2
     ;;
   esac
+  eclim_setup
   command -v npm &> /dev/null && npm install npm@latest -g && npm update -g
   command -v gem &> /dev/null && sudo gem update
 }
