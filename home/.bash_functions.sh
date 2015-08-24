@@ -84,6 +84,10 @@ updateplatform() {
   command -v gem &> /dev/null && sudo gem update
 }
 
+eclim_setup() {
+  java -Dvim.files=${HOME}/.vim -Declipse.home=${ECLIPSE_HOME} -jar eclim_2.5.0.jar install
+}
+
 completehomeupdate() {
   if ! command -v git &> /dev/null; then
     echo "git isn't installed or isn't functional." >&2
