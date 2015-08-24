@@ -161,6 +161,11 @@ updateclean() {
   rm -rf ~/.homesick/repos/vimrc
 }
 
+starteclimd() {
+  ${ECLIPSE_HOME}/eclimd &
+}
+
+
 ssh-init-home() {
   local target=${1}
 
@@ -173,4 +178,5 @@ ssh-init-home() {
     $(declare -f updatehome)
     updatehome
 EOF
+
 }
