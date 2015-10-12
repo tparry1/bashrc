@@ -79,8 +79,15 @@ updateplatform() {
       echo "I don't know how to update all teh things on ${PLATFORM}." >&2
     ;;
   esac
+  eclim_setup
   command -v npm &> /dev/null && npm install npm@latest -g && npm update -g
   command -v gem &> /dev/null && sudo gem update
+}
+
+eclim_setup() {
+  wget http://sourceforge.net/projects/eclim/files/eclim/2.5.0/eclim_2.5.0.jar
+  java -Dvim.files=${HOME}/.vim -Declipse.home=${ECLIPSE_HOME} -jar eclim_2.5.0.jar install
+  rm eclim_2.5.0.jar
 }
 
 completehomeupdate() {
@@ -153,6 +160,11 @@ updateclean() {
   rm -rf ~/.homesick/repos/vimrc
 }
 
+starteclimd() {
+  ${ECLIPSE_HOME}/eclimd &
+}
+
+
 ssh-init-home() {
   local target=${1}
 
@@ -165,4 +177,5 @@ ssh-init-home() {
     $(declare -f updatehome)
     updatehome
 EOF
+
 }
