@@ -28,10 +28,9 @@ source_dir() {
 
 docker_start() {
   # If I have boot2docker, go ahead and init it
-  if hash boot2docker 2>/dev/null; then
-    boot2docker init
-    boot2docker start
-    eval $(boot2docker shellinit)
+  if hash docker-machine 2>/dev/null; then
+    docker-machine start default
+    eval $(docker-machine env default)
   fi
 }
 

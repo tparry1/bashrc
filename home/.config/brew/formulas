@@ -6,6 +6,8 @@ colorsvn
 coreutils
 curl
 ctags
+docker
+docker-machine
 findutils
 git
 gnu-sed
