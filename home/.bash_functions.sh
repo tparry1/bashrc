@@ -26,11 +26,26 @@ source_dir() {
   fi
 }
 
+docker_stop() {
+  if command_exists docker-machine; then
+    if [[ $(docker-machine ls | grep dockerdaemon | wc -l) -gt "0" ]]; then
+      echo "Stopping docker daemon"
+      docker-machine stop dockerdaemon
+    fi
+  fi
+}
+
+
 docker_start() {
   # If I have boot2docker, go ahead and init it
-  if hash docker-machine 2>/dev/null; then
-    docker-machine start default
-    eval $(docker-machine env default)
+  if command_exists docker-machine; then
+    docker_stop
+    if [[ $(docker-machine ls | grep dockerdaemon | wc -l) -eq "0" ]]; then
+      echo "Creating new docker daemon..."
+      docker-machine create --driver virtualbox dockerdaemon
+    fi
+    docker-machine start dockerdaemon
+    eval $(docker-machine env dockerdaemon)
   fi
 }
 
