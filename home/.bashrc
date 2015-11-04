@@ -44,7 +44,11 @@ fi
 export ANDROID_HOME=${HOME}/Development/android
 export PATH=${PATH}:${ANDROID_HOME}/tools
 
-tmux new -s main
+if [ "$(tmux ls | grep main -c)" -gt "0" ] ; then
+  tmux a -t main
+else
+  tmux new -s main
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/robert.smallwood/.gvm/bin/gvm-init.sh" ]] && source "/Users/robert.smallwood/.gvm/bin/gvm-init.sh"
