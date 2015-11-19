@@ -123,6 +123,7 @@ completehomeupdate() {
   fi
 
   # Initialize homesick if needed.
+  echo "${HOMESHICK}"
   if [[ ! -d "${HOMESHICK}" ]]; then
     echo "Cloning homeshick ${HOMESHICK}"
     git clone git://github.com/andsens/homeshick.git "${HOMESHICK}"
