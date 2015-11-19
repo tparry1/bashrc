@@ -54,7 +54,9 @@ export HOMESICK="${HOME}/.homesick/repos"
 export HOMESHICK="${HOMESICK}/homeshick"
 
 # Use homeshick to manage my dotfiles repos.
-source "${HOMESHICK}/homeshick.sh"
+if [[ ! -d "${HOMESHICK}" ]]; then
+  source "${HOMESHICK}/homeshick.sh"
+fi
 
 # My homesick repos
 HOMESICK_REPOS=( "git@github.com:rdsmallwood928/bashrc" )
@@ -123,9 +125,7 @@ completehomeupdate() {
   fi
 
   # Initialize homesick if needed.
-  echo "${HOMESHICK}"
   if [[ ! -d "${HOMESHICK}" ]]; then
-    echo "Cloning homeshick ${HOMESHICK}"
     git clone git://github.com/andsens/homeshick.git "${HOMESHICK}"
   fi
 
