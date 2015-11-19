@@ -84,7 +84,7 @@ updateplatform() {
     darwin)
       # Update all teh OSX things.
       sudo softwareupdate -i -a
-      if command -v brew &> /dev/null; then
+      if command_exists brew; then
         chug_brews
       else
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -93,7 +93,7 @@ updateplatform() {
     ;;
 
     linux)
-      if command -v brew &> /dev/null; then
+      if command_exists brew; then
         chug_brews
       else
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
@@ -117,13 +117,14 @@ eclim_setup() {
 }
 
 completehomeupdate() {
-  if ! command -v git &> /dev/null; then
+  if ! command_exists git; then
     echo "git isn't installed or isn't functional." >&2
     return 1
   fi
 
   # Initialize homesick if needed.
   if [[ ! -d "${HOMESHICK}" ]]; then
+    echo "Cloning homeshick ${HOMESHICK}"
     git clone git://github.com/andsens/homeshick.git "${HOMESHICK}"
   fi
 
