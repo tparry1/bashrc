@@ -41,13 +41,24 @@ if [ "${PLATFORM}" = "darwin" ] ; then
   export ECLIPSE_HOME=/opt/homebrew-cask/Caskroom/eclipse-java/4.5/Eclipse.app/Contents/Eclipse;
 fi
 
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    SESSION_TYPE=remote/ssh
+    # many other tests omitted
+else
+  case $(ps -o comm= -p $PPID) in
+    sshd|*/sshd) SESSION_TYPE=remote/ssh;;
+  esac
+fi
+
 export ANDROID_HOME=${HOME}/Development/android
 export PATH=${PATH}:${ANDROID_HOME}/tools
 
-if [ "$(tmux ls | grep main -c)" -gt "0" ] ; then
-  tmux a -t main
-else
-  tmux new -s main
+if [ "$SESSION_TYPE" != "remote/ssh" ]; then
+  if [ "$(tmux ls | grep main -c)" -gt "0" ] ; then
+    tmux a -t main
+  else
+    tmux new -s main
+  fi
 fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
