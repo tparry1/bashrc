@@ -1,3 +1,26 @@
+#!/bin/sh
+
+export HOMESICK="${HOME}/.homesick/repos"
+export HOMESHICK="${HOMESICK}/homeshick"
+
+# Use homeshick to manage my dotfiles repos.
+if [[ -d "${HOMESHICK}" ]]; then
+  echo "Sourcing homeshick"
+  source "${HOMESHICK}/homeshick.sh"
+fi
+
+# My homesick repos
+HOMESICK_REPOS=( "git@github.com:rdsmallwood928/bashrc" )
+command -v vim &> /dev/null && HOMESICK_REPOS+=( "git@github.com:rdsmallwood928/vimrc" )
+
+export HOMESICK_REPOS="${HOMESICK_REPOS[@]}"
+
+# Shared dirs we should create first so homeshick repos don't mangle eachother:
+export HOMESICK_MKDIRS=( "${HOME}/.ssh"
+                         "${HOME}/.vim"
+                         "${HOME}/.tmux"
+                         "${HOME}/bin" )
+
 command_exists () {
       type "$1" &> /dev/null;
       #echo "command $1 status $?"
@@ -49,26 +72,6 @@ docker_start() {
   fi
 }
 
-
-export HOMESICK="${HOME}/.homesick/repos"
-export HOMESHICK="${HOMESICK}/homeshick"
-
-# Use homeshick to manage my dotfiles repos.
-if [[ -d "${HOMESHICK}" ]]; then
-  source "${HOMESHICK}/homeshick.sh"
-fi
-
-# My homesick repos
-HOMESICK_REPOS=( "git@github.com:rdsmallwood928/bashrc" )
-command -v vim &> /dev/null && HOMESICK_REPOS+=( "git@github.com:rdsmallwood928/vimrc" )
-
-export HOMESICK_REPOS="${HOMESICK_REPOS[@]}"
-
-# Shared dirs we should create first so homeshick repos don't mangle eachother:
-export HOMESICK_MKDIRS=( "${HOME}/.ssh"
-                         "${HOME}/.vim"
-                         "${HOME}/.tmux"
-                         "${HOME}/bin" )
 
 chug_brews() {
   sync-brew
