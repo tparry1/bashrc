@@ -54,7 +54,7 @@ export HOMESICK="${HOME}/.homesick/repos"
 export HOMESHICK="${HOMESICK}/homeshick"
 
 # Use homeshick to manage my dotfiles repos.
-if [[ ! -d "${HOMESHICK}" ]]; then
+if [[ -d "${HOMESHICK}" ]]; then
   source "${HOMESHICK}/homeshick.sh"
 fi
 
