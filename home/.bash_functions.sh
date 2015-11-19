@@ -59,14 +59,24 @@ source "${HOMESHICK}/homeshick.sh"
 # My homesick repos
 HOMESICK_REPOS=( "git@github.com:rdsmallwood928/bashrc" )
 command -v vim &> /dev/null && HOMESICK_REPOS+=( "git@github.com:rdsmallwood928/vimrc" )
-command -v atom &> /dev/null && HOMESICK_REPOS+=( "git@github.com:rdsmallwood928/atomrc" )
 
 export HOMESICK_REPOS="${HOMESICK_REPOS[@]}"
 
 # Shared dirs we should create first so homeshick repos don't mangle eachother:
 export HOMESICK_MKDIRS=( "${HOME}/.ssh"
                          "${HOME}/.vim"
+                         "${HOME}/.tmux"
                          "${HOME}/bin" )
+
+chug_brews() {
+  sync-brew
+  brew update
+  brew upgrade
+  brew cleanup
+  brew cask update
+  brew cask cleanup
+}
+
 
 updateplatform() {
   echo "This appears to be ${PLATFORM}"
@@ -75,19 +85,20 @@ updateplatform() {
       # Update all teh OSX things.
       sudo softwareupdate -i -a
       if command -v brew &> /dev/null; then
-        sync-brew
-        brew update
-        brew upgrade
-        brew cleanup
-        brew cask update
-        brew cask cleanup
+        chug_brews
+      else
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        chug_brews
       fi
     ;;
 
     linux)
-      # Update all teh Linux things.
-      command -v apt-get &> /dev/null && sudo apt-get update && sudo apt-get upgrade
-      command -v yum &> /dev/null && sudo yum update && sudo yum upgrade
+      if command -v brew &> /dev/null; then
+        chug_brews
+      else
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+        chug_brews
+      fi
     ;;
 
     *)
@@ -144,8 +155,6 @@ completehomeupdate() {
   # Update vim configurations
   [[ -e "${HOME}/.vim/makefile" ]] && ( cd "${HOME}/.vim"; make install )
 
-  # Sync atom packages
-  command -v apm &> /dev/null && ( cd "${HOME}/.atom"; ./sync-atom )
   echo "update complete"
 }
 
