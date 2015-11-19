@@ -5,7 +5,6 @@ export HOMESHICK="${HOMESICK}/homeshick"
 
 # Use homeshick to manage my dotfiles repos.
 if [[ -d "${HOMESHICK}" ]]; then
-  echo "Sourcing homeshick"
   source "${HOMESHICK}/homeshick.sh"
 fi
 
@@ -21,9 +20,12 @@ export HOMESICK_MKDIRS=( "${HOME}/.ssh"
                          "${HOME}/.tmux"
                          "${HOME}/bin" )
 
+brew_formulas=${HOME}/.config/brew/formulas
+brew_casks=${HOME}/.config/brew/casks
+brew_taps=${HOME}/.config/brew/taps
+
 command_exists () {
-      type "$1" &> /dev/null;
-      #echo "command $1 status $?"
+  type "$1" &> /dev/null;
 }
 
 source_platform() {
@@ -32,9 +34,7 @@ source_platform() {
   else
     uname_flag='-s'
   fi
-
   export PLATFORM=$(uname ${uname_flag} | tr '[:upper:]' '[:lower:]')
-
   source "${HOME}/.bashrc.d/platform/${PLATFORM}.sh"
 }
 
@@ -72,6 +72,38 @@ docker_start() {
   fi
 }
 
+sync-brew (){
+  if ! command -v brew >&/dev/null; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
+  fi;
+  brew doctor;
+  while read tap 0<&3; do
+    brew tap "${tap}";
+  done 3< "${brew_taps}";
+  while read formula 0<&3; do
+    brew install "${formula}";
+  done 3< "${brew_formulas}";
+  while read cask 0<&3; do
+    brew cask install "${cask}";
+  done 3< "${brew_casks}";
+  brew linkapps;
+  brew cleanup;
+  brew prune
+}
+
+sync-brew-installed() {
+  brew tap > "${brew_taps}"
+  brew leaves > "${brew_formulas}"
+  brew cask list > "${brew_casks}"
+
+  (
+    homeshick cd bashrc
+    git difftool -- "$(readlink "${brew_taps}")"
+    git difftool -- "$(readlink "${brew_formulas}")"
+    git difftool -- "$(readlink "${brew_casks}")"
+    git commit -av
+  )
+}
 
 chug_brews() {
   sync-brew
@@ -81,7 +113,6 @@ chug_brews() {
   brew cask update
   brew cask cleanup
 }
-
 
 updateplatform() {
   echo "This appears to be ${PLATFORM}"
