@@ -76,6 +76,9 @@ sync-brew (){
   if ! command -v brew >&/dev/null; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
   fi;
+  if !command_exists git; then
+    brew install git
+  fi
   brew doctor;
   while read tap 0<&3; do
     brew tap "${tap}";
