@@ -124,7 +124,7 @@ updateplatform() {
         chug_brews
       else
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-        export PATH="{$PATH}:${HOME}/.linuxbrew/bin"
+        export PATH="${PATH}:${HOME}/.linuxbrew/bin"
         chug_brews
       fi
     ;;
