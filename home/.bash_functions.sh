@@ -35,7 +35,6 @@ source_platform() {
     uname_flag='-s'
   fi
   export PLATFORM=$(uname ${uname_flag} | tr '[:upper:]' '[:lower:]')
-  source "${HOME}/.bashrc.d/platform/${PLATFORM}.sh"
 }
 
 source_dir() {
