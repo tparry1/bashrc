@@ -76,7 +76,7 @@ sync-brew (){
   if ! command -v brew >&/dev/null; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
   fi;
-  if !command_exists git; then
+  if ! command_exists git; then
     brew install git
   fi
   brew doctor;
