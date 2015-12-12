@@ -133,6 +133,7 @@ updateplatform() {
     linux)
       if command_exists brew; then
         chug_brews
+      else
         su root
         apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
         exit
