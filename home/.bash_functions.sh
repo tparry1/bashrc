@@ -208,6 +208,7 @@ updatehome() {
 
 
 updateall() {
+  source_platform
   updateplatform
   updatehome
 }
