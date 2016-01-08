@@ -1,4 +1,4 @@
-#
+#! /bin/sh
 # This shell prompt config file was created by promptline.vim
 #
 
@@ -22,6 +22,10 @@ function __promptline_ps1 {
 
   #VIRTUAL_ENV
   __promptline_wrapper "${VIRTUAL_ENV##*/}" "$slice_prefix" "$slice_suffix" \
+    && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+
+  #ENVIRONMENT_KEY
+  __promptline_wrapper "${ENVIRONMENT_KEY##*/}" "$slice_prefix" "$slice_suffix" \
     && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
 
   # section "y" header
