@@ -23,6 +23,7 @@ export HOMESICK_MKDIRS=( "${HOME}/.ssh"
 brew_formulas=${HOME}/.config/brew/formulas
 brew_casks=${HOME}/.config/brew/casks
 brew_taps=${HOME}/.config/brew/taps
+npm_packages=${HOME}/.config/npm/packages
 
 command_exists () {
   type "$1" &> /dev/null;
@@ -93,6 +94,16 @@ sync-brew (){
   brew prune
 }
 
+setup_global_npm_packages () {
+  if command_exists npm; then
+    while read package 0<&3; do
+      npm install -g "${package}";
+    done 3< "${npm_packages}";
+  else
+    echo "npm is not installed...unable to install global npm packages"
+  fi
+}
+
 sync-brew-installed() {
   brew tap > "${brew_taps}"
   brew leaves > "${brew_formulas}"
@@ -114,6 +125,7 @@ chug_brews() {
   brew cleanup
   brew cask update
   brew cask cleanup
+  setup_global_npm_packages
 }
 
 updateplatform() {
