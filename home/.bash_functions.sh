@@ -99,7 +99,7 @@ setup_global_npm_packages () {
     while read package 0<&3; do
       npm install -g "${package}";
     done 3< "${npm_packages}";
-  else
+	else
     echo "npm is not installed...unable to install global npm packages"
   fi
 }
@@ -208,6 +208,8 @@ completehomeupdate() {
 
   # Update vim configurations
   [[ -e "${HOME}/.vim/makefile" ]] && ( cd "${HOME}/.vim"; make install )
+	cd ~/.vim/bundle/YouCompleteMe
+	./install.py --clang-completer --tern-completer --gocode-completer
 
   echo "update complete"
 }
