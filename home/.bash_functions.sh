@@ -147,7 +147,6 @@ updateplatform() {
         chug_brews
       else
         sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
-        exit
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
         export PATH="${PATH}:${HOME}/.linuxbrew/bin"
         chug_brews
