@@ -208,6 +208,7 @@ completehomeupdate() {
   [[ -e "${HOME}/.vim/makefile" ]] && ( cd "${HOME}/.vim"; make install )
 	cd ~/.vim/bundle/YouCompleteMe
 	./install.py --clang-completer --tern-completer --gocode-completer
+  cd ~
 
   echo "update complete"
 }
