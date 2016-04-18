@@ -241,7 +241,17 @@ updateclean() {
 }
 
 starteclimd() {
-  ${ECLIPSE_HOME}/eclimd &
+  if [[ ${PLATFORM} != 'darwin' ]]; then
+    if [[ $(ps aux | grep Xvfb | grep :98 | wc -l) == "1" ]]; then
+      kill -9 $(ps aux | grep Xvfb | grep :98 | awk -F ' ' '{print $2}');
+    fi
+    Xvfb :98 -screen 0 1024x768x24 &
+    echo "Sleeping five seconds in order for Xvfb to start...";
+    sleep 5;
+    DISPLAY=:98 ${ECLIPSE_HOME}/eclimd -b
+  else
+    ${ECLIPSE_HOME}/eclipse/eclimd -b
+  fi
 }
 
 

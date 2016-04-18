@@ -39,6 +39,8 @@ fi
 
 if [ "${PLATFORM}" = "darwin" ] ; then
   export ECLIPSE_HOME=/opt/homebrew-cask/Caskroom/eclipse-java/4.5/Eclipse.app/Contents/Eclipse;
+else
+  export ECLIPSE_HOME=/opt/eclipse
 fi
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
