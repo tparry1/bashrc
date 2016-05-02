@@ -29,6 +29,10 @@ command_exists () {
   type "$1" &> /dev/null;
 }
 
+howbigis () {
+  du -hs "$1"
+}
+
 source_platform() {
   if [[ ${OS} =~ Windows ]]; then
     uname_flag='-o'
