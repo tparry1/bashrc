@@ -31,6 +31,7 @@ python
 rsync
 ruby-build
 ruby-install
+scala
 shellcheck
 ssh-copy-id
 task
