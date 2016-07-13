@@ -208,7 +208,19 @@ completehomeupdate() {
 
   source "${HOME}/.bashrc"
 
+  updatetmuxplugins
+  updatevim
+
   echo "update complete"
+}
+
+updatetmuxplugins() {
+  ${HOME}/.tmux/plugins/tpm/bin/install_plugins
+  ${HOME}/.tmux/plugins/tpm/bin/update_plugins all
+}
+
+updatevim() {
+  vim +PlugInstall +qall
 }
 
 updatehome() {
