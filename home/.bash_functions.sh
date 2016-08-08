@@ -215,6 +215,7 @@ completehomeupdate() {
 }
 
 updatetmuxplugins() {
+  ${HOME}/.tmux/plugins/tpm/tpm
   ${HOME}/.tmux/plugins/tpm/bin/install_plugins
   ${HOME}/.tmux/plugins/tpm/bin/update_plugins all
 }
