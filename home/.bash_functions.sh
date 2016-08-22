@@ -265,6 +265,16 @@ starteclimd() {
   fi
 }
 
+switch_aws() {
+  echo "Switching aws to creds to account $1"
+  if [ ! -e "${HOME}/.amazon/$1" ]; then
+    echo "$1 credentials not found, aborting..."
+    return
+  else
+    cp "${HOME}/.amazon/$1" "${HOME}/.aws"
+    source ${HOME}/.aws
+  fi
+}
 
 ssh-init-home() {
   local target=${1}
