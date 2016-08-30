@@ -1,7 +1,6 @@
 # ${HOME}/.bashrc: executed by bash(1) for non-login shells.  If not running
 # interactively, don't do anything
-[[ -z "${PS1}" ]] && return
-
+[[ -z "${PS1}" ]] && retudefault
 # Load the shell dotfiles, and then some:
 # # * ~/.path can be used to extend `$PATH`.
 # # * ~/.extra can be used for other settings you don't want to commit.
@@ -21,7 +20,7 @@ source_platform
 # Source the rest of the things.
 source_dir topics
 
-source ./.aws
+switch_aws default us-west-2
 
 #appending .local to path so that pip --user installs are found
 export PATH=${PATH}:${HOME}/.local/bin

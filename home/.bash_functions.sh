@@ -271,9 +271,22 @@ switch_aws() {
     echo "$1 credentials not found, aborting..."
     return
   else
-    cp "${HOME}/.amazon/$1" "${HOME}/.aws"
-    source ${HOME}/.aws
+    cp "${HOME}/.amazon/$1" "${HOME}/.amazon/default"
+    source ${HOME}/.amazon/default
   fi
+  if [ ! -z "$2" ]; then
+    if [ ! -e ${HOME}/.aws ]; then
+      mkdir ${HOME}/.aws
+    fi
+    echo -e "[default]\nregion=${2}\n" > ${HOME}/.aws/config
+  else
+    if [ -e ${HOME}/.aws/config ]; then
+      rm ${HOME}/.aws/config
+    fi
+    echo "Credentials were set, but no region was provided (old default region was removed)"
+  fi
+  echo "Complete!"
+  return
 }
 
 ssh-init-home() {
