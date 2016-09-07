@@ -222,6 +222,7 @@ updatetmuxplugins() {
 
 updatevim() {
   vim +PlugInstall +qall
+  vim +PlugClean +qall
 }
 
 updatehome() {
