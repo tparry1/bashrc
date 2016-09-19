@@ -1,3 +1,7 @@
+export PATH="${HOME}/.linuxbrew/bin:${HOME}/bin:${PATH}"
+export EDITOR="vim"
+export VISUAL="${EDITOR}"
+export LANG=en_US.UTF-8
 # ${HOME}/.bashrc: executed by bash(1) for non-login shells.  If not running
 # interactively, don't do anything
 [[ -z "${PS1}" ]] && retudefault
