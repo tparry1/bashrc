@@ -1,4 +1,8 @@
-export PATH="${HOME}/.linuxbrew/bin:${HOME}/bin:${PATH}"
+#Set up the PATH
+export ANDROID_HOME=${HOME}/Development/android
+#appending .local to path so that pip --user installs are found
+export PATH="${HOME}/.linuxbrew/bin:${HOME}/bin:${PATH}:${HOME}/.local/bin:${ANDROID_HOME}/tools"
+
 export EDITOR="vim"
 export VISUAL="${EDITOR}"
 export LANG=en_US.UTF-8
@@ -26,9 +30,6 @@ source_dir topics
 
 switch_aws default us-west-2
 
-#appending .local to path so that pip --user installs are found
-export PATH=${PATH}:${HOME}/.local/bin
-
 # init nvm if it exists
 if command_exists brew ; then
   export NVM_DIR=~/.nvm
@@ -54,9 +55,6 @@ else
     sshd|*/sshd) SESSION_TYPE=remote/ssh;;
   esac
 fi
-
-export ANDROID_HOME=${HOME}/Development/android
-export PATH=${PATH}:${ANDROID_HOME}/tools
 
 if [ "$SESSION_TYPE" != "remote/ssh" ]; then
   if [ "$(tmux ls | grep main -c)" -gt "0" ] ; then
