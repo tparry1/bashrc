@@ -64,5 +64,10 @@ if [ "$SESSION_TYPE" != "remote/ssh" ]; then
   fi
 fi
 
+#ALIASES
+if [ "${PLATFORM}" = "linux" ] ; then
+  alias tmux="TERM=xterm-256color tmux"
+fi
+
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/robert.smallwood/.gvm/bin/gvm-init.sh" ]] && source "/Users/robert.smallwood/.gvm/bin/gvm-init.sh"
