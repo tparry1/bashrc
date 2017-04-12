@@ -12,6 +12,7 @@ CMake
 docker
 docker-machine
 findutils
+fzf
 git
 gnu-sed
 go
