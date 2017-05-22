@@ -9,8 +9,8 @@ if [[ -d "${HOMESHICK}" ]]; then
 fi
 
 # My homesick repos
-HOMESICK_REPOS=( "git@github.com:rdsmallwood928/bashrc" )
-command -v vim &> /dev/null && HOMESICK_REPOS+=( "git@github.com:rdsmallwood928/vimrc" )
+HOMESICK_REPOS=( "git@github.com:tparry1/bashrc" )
+command -v vim &> /dev/null && HOMESICK_REPOS+=( "git@github.com:tparry1/vimrc" )
 
 export HOMESICK_REPOS="${HOMESICK_REPOS[@]}"
 
