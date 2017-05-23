@@ -229,7 +229,7 @@ updatehome() {
   # Make sure git works - we're gonna need it!
   if command_exists updateclean; then
     updateclean
-    curl -fsSL https://raw.githubusercontent.com/rdsmallwood928/bashrc/master/home/.bash_functions.sh > ${HOME}/.temp_func
+    curl -fsSL https://raw.githubusercontent.com/tparry1/bashrc/master/home/.bash_functions.sh > ${HOME}/.temp_func
     source ${HOME}/.temp_func
     rm ${HOME}/.temp_func
     echo "clean completed"
