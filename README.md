@@ -8,5 +8,5 @@ Bootstrapping
 Git this party started:
 
 ```bash
-source <(curl -fsSL https://raw.githubusercontent.com/rdsmallwood928/bashrc/master/home/.bash_functions.sh) && updatehome
+source <(curl -fsSL https://raw.githubusercontent.com/tparry1/bashrc/master/home/.bash_functions.sh) && updatehome
 ```
